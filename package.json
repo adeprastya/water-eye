@@ -1,0 +1,13 @@
+{
+	"name": "water-eye",
+	"version": "1.0.0",
+	"description": "API for water quality app",
+	"main": "src/app.js",
+	"scripts": {
+		"start": "node src/app.js",
+		"start:dev": "nodemon src/app.js"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC"
+}
