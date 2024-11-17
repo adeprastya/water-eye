@@ -1,4 +1,5 @@
 const create = async ({ email, password, name, picture }) => {
+	// Ade
 	// TODO: Masukan data user ke database
 	// input: { email, password, name, picture }
 	// output: Jika berhasil kembalikan true, jika gagal kembalikan false
@@ -7,6 +8,7 @@ const create = async ({ email, password, name, picture }) => {
 };
 
 const findEmail = async (email) => {
+	// Zacky
 	// TODO: Cari email di database
 	// input: email
 	// output: Jika ada kembalikan true, jika tidak kembalikan false
@@ -15,6 +17,7 @@ const findEmail = async (email) => {
 };
 
 const findByEmail = async (email) => {
+	// Thessa
 	// TODO: Cari data berdasarkan email di database
 	// input: email
 	// output: Jika ada kembalikan data, jika tidak kembalikan false
@@ -23,6 +26,7 @@ const findByEmail = async (email) => {
 };
 
 const findOne = async (id) => {
+	// Iskandar
 	// TODO: Cari data berdasarkan id di database
 	// input: id
 	// output: Jika ada kembalikan data, jika tidak kembalikan false
@@ -31,6 +35,7 @@ const findOne = async (id) => {
 };
 
 const patchOne = async (id) => {
+	// Thessa
 	// TODO: Update data user di database berdasarkan id
 	// input: id
 	// output: Jika berhasil kembalikan data, jika gagal kembalikan false
@@ -39,6 +44,7 @@ const patchOne = async (id) => {
 };
 
 const deleteOne = async (id) => {
+	// Zacky
 	// TODO: Hapus data user di database berdasarkan id
 	// input: id
 	// output: Jika berhasil kembalikan true, jika gagal kembalikan false
@@ -47,6 +53,7 @@ const deleteOne = async (id) => {
 };
 
 const signin = async (email, password) => {
+	// Iskandar
 	// TODO: Cari dan verifikasi email dan password di database
 	// input: email, password
 	// output: Jika valid kembalikan true, jika tidak kembalikan false

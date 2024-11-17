@@ -1,4 +1,5 @@
 const validateRegisterData = (data) => {
+	// Zacky
 	// TODO: Validasi field yang diperlukan { email, password, name, picture }, dan format data sesuai
 	// input: req.body
 	// output: Jika valid kembalikan true, jika tidak kembalikan false
@@ -7,6 +8,7 @@ const validateRegisterData = (data) => {
 };
 
 const validateSigninData = (data) => {
+	// Iskandar
 	// TODO: Validasi field yang diperlukan { email, password }, dan format data sesuai
 	// input: req.body
 	// output: Jika valid kembalikan true, jika tidak kembalikan false
@@ -15,6 +17,7 @@ const validateSigninData = (data) => {
 };
 
 const validateScanImage = (image) => {
+	// Thessa
 	// TODO: Validasi data dan format image sesuai
 	// input: image
 	// output: Jika valid kembalikan true, jika tidak kembalikan false
