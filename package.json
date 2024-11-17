@@ -2,12 +2,16 @@
 	"name": "water-eye",
 	"version": "1.0.0",
 	"description": "API for water quality app",
-	"main": "src/app.js",
+	"main": "app",
 	"scripts": {
-		"start": "node src/app.js",
-		"start:dev": "nodemon src/app.js"
+		"start": "node app",
+		"start:dev": "nodemon app"
 	},
 	"keywords": [],
 	"author": "",
-	"license": "ISC"
+	"license": "ISC",
+	"dependencies": {
+		"dotenv": "^16.4.5",
+		"express": "^4.21.1"
+	}
 }
