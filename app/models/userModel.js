@@ -1,10 +1,27 @@
+const { usersRef } = require("../config/firestore");
+const { generateId, hashPassword } = require("../utils/commonHelper");
+
 const create = async ({ email, password, name, picture }) => {
 	// Ade
-	// TODO: Masukan data user ke database
-	// input: { email, password, name, picture }
-	// output: Jika berhasil kembalikan true, jika gagal kembalikan false
+	try {
+		const newUser = {
+			id: generateId(),
+			email,
+			password: await hashPassword(password),
+			name,
+			picture: picture || "",
+			createdAt: new Date(),
+			updatedAt: new Date()
+		};
 
-	return true;
+		const userCreated = await usersRef.add(newUser);
+
+		return userCreated.id;
+	} catch (err) {
+		console.error("Error creating user:", err);
+
+		return false;
+	}
 };
 
 const findEmail = async (email) => {

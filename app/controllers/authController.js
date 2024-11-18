@@ -1,31 +1,38 @@
 const userModel = require("../models/userModel.js");
-const { validateRegisterData } = require("../utils/validator");
+const { validateRegisterData, validateSigninData } = require("../utils/validator");
 const { generateToken } = require("../utils/token");
 
 const signup = async (req, res) => {
-	const registerDataValidation = validateRegisterData(req.body);
-
-	if (!registerDataValidation) {
-		return res
-			.status(400)
-			.send(JSON.stringify({ status: "error", message: "Invalid request data or missing required fields" }));
+	const isValid = validateRegisterData(req.body);
+	if (!isValid) {
+		return res.status(400).json({
+			status: "error",
+			message: "Invalid request data or missing required fields"
+		});
 	}
 
 	const { email, password, name, picture } = req.body;
 
-	const checkEmail = await userModel.findEmail(email);
-
-	if (checkEmail) {
-		return res.status(409).send(JSON.stringify({ status: "error", message: "Email already exists" }));
+	const emailExist = await userModel.findEmail(email);
+	if (emailExist) {
+		return res.status(409).json({
+			status: "error",
+			message: "Email already exists"
+		});
 	}
 
-	const result = await userModel.create({ email, password, name, picture });
-
-	if (!result) {
-		return res.status(500).send(JSON.stringify({ status: "error", message: "Error creating user" }));
+	const userCreated = await userModel.create({ email, password, name, picture });
+	if (!userCreated) {
+		return res.status(500).json({
+			status: "error",
+			message: "Error creating user"
+		});
 	}
 
-	return res.status(200).send(JSON.stringify({ status: "success", message: "User created successfully" }));
+	return res.status(200).json({
+		status: "success",
+		message: "User created successfully"
+	});
 };
 
 const signin = async (req, res) => {
