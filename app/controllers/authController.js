@@ -36,9 +36,8 @@ const signup = async (req, res) => {
 };
 
 const signin = async (req, res) => {
-	const signinDataValidation = validateSigninData(req.body);
-
-	if (!signinDataValidation) {
+	const isValid = validateSigninData(req.body);
+	if (!isValid) {
 		return res
 			.status(400)
 			.send(JSON.stringify({ status: "error", message: "Invalid request data or missing required fields" }));
@@ -46,22 +45,27 @@ const signin = async (req, res) => {
 
 	const { email, password } = req.body;
 
-	const signinValidation = await userModel.signin(email, password);
-
-	if (!signinValidation) {
+	const isVerified = await userModel.signin(email, password);
+	if (!isVerified) {
 		return res.status(401).send(JSON.stringify({ status: "error", message: "Invalid email or password" }));
 	}
 
-	const data = await userModel.findByEmail(email);
+	const { id } = await userModel.findByEmail(email);
+	if (!id) {
+		return res.status(404).send(JSON.stringify({ status: "error", message: "User not found" }));
+	}
 
-	const token = generateToken(data.id);
+	const token = generateToken(id);
+	if (!token) {
+		return res.status(500).send(JSON.stringify({ status: "error", message: "Error generating token" }));
+	}
 
 	return res.status(200).send(
 		JSON.stringify({
 			status: "success",
 			message: "User signed in successfully",
 			data: {
-				token
+				token: token
 			}
 		})
 	);
