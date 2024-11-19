@@ -15,7 +15,6 @@ const create = async ({ email, password, name, picture }) => {
 		};
 
 		const userCreated = await usersRef.add(newUser);
-
 		return userCreated.id;
 	} catch (err) {
 		console.error("Error creating user:", err);
