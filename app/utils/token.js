@@ -3,14 +3,13 @@ const SECRET_KEY = process.env.SECRET_KEY;
 
 const generateToken = (id) => {
 	// Ade
-	// TODO: Generate JWT token dengan payload id
-	// input: id
-	// output: JWT token
 	try {
-		const token = jwt.sign({ id }, SECRET_KEY, { algorithm: "RS256", expiresIn: "1h" });
+		const token = jwt.sign({ id }, SECRET_KEY, { algorithm: "HS256", expiresIn: "1h" });
+
 		return token;
 	} catch (err) {
-		console.log(err);
+		console.error(err);
+
 		return false;
 	}
 };
