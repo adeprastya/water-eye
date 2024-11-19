@@ -4,9 +4,8 @@ const { validateScanImage } = require("../utils/validator");
 const getScans = async (req, res) => {
 	const userId = req.params.userId;
 
-	const result = await scanModel.getHistories(userId);
-
-	if (!result) {
+	const data = await scanModel.getHistories(userId);
+	if (!data) {
 		return res.status(500).send(JSON.stringify({ status: "error", message: "Error getting scans" }));
 	}
 
@@ -14,7 +13,7 @@ const getScans = async (req, res) => {
 		JSON.stringify({
 			status: "success",
 			message: "Scans retrieved successfully",
-			data: result
+			data
 		})
 	);
 };
@@ -23,15 +22,13 @@ const postScans = async (req, res) => {
 	const userId = req.params.userId;
 	const image = req.body;
 
-	const scanImageValidation = validateScanImage(image);
-
-	if (!scanImageValidation) {
-		return res.status(400).send(JSON.stringify({ status: "error", message: "Image data is required" }));
+	const isImageValid = validateScanImage(image);
+	if (!isImageValid) {
+		return res.status(400).send(JSON.stringify({ status: "error", message: "Image format is invalid or missing" }));
 	}
 
-	const result = await scanModel.postScan(userId, image);
-
-	if (!result) {
+	const data = await scanModel.postScan(userId, image);
+	if (!data) {
 		return res.status(500).send(JSON.stringify({ status: "error", message: "Error getting scans result" }));
 	}
 
@@ -39,7 +36,7 @@ const postScans = async (req, res) => {
 		JSON.stringify({
 			status: "success",
 			message: "Scans retrieved successfully",
-			data: result
+			data
 		})
 	);
 };
