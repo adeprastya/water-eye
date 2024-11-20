@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 const { usersRef } = require("../config/firestore");
 const { generateId, hashPassword } = require("../utils/commonHelper");
 

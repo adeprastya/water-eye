@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 const getHistories = async (userId) => {
 	// Thessa
 	// TODO: Ambil data scan dari database berdasarkan user id
