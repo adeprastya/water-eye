@@ -29,7 +29,19 @@ const findEmail = async (email) => {
 	// input: email
 	// output: Jika ada kembalikan true, jika tidak kembalikan false
 
+	try {
+        const snapshot = await usersRef.where("email", "==", email).get();
+
+        if (!snapshot.empty) {
+            return true; 
+        }
+
+        return false; 
+    } catch (err) {
+        console.error("Error finding email:", err);
+
 	return false;
+	}
 };
 
 const findByEmail = async (email) => {
@@ -65,7 +77,21 @@ const deleteOne = async (id) => {
 	// input: id
 	// output: Jika berhasil kembalikan true, jika gagal kembalikan false
 
-	return true;
+	try {
+        const userDoc = await usersRef.doc(id).get();
+
+        if (!userDoc.exists) {
+            console.log(`User with id ${id} does not exist.`);
+            return false; 
+        }
+
+        await usersRef.doc(id).delete();
+        console.log(`User with id ${id} deleted successfully.`);
+        return true; 	
+    } catch (err) {
+        console.error("Error deleting user:", err);
+        return false; 
+    }
 };
 
 const signin = async (email, password) => {
