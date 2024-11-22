@@ -1,43 +1,64 @@
+const { usersRef } = require("../services/firestore");
+const { storeScanImage } = require("../services/cloudStorage");
+const { predict } = require("../services/inference");
+const { generateId } = require("../utils/commonHelper");
+
 const getHistories = async (userId) => {
-  // Thessa
-  // TODO: Ambil data scan dari database berdasarkan user id
-  // input: user id
-  // output: Jika ada kembalikan data, jika tidak kembalikan false
-  try {
-    if (!userId) {
-      console.error("User ID is required.");
-      return false;
-    }
+	try {
+		const querySnapshot = await usersRef.doc(userId).collection("scans").orderBy("createdAt", "desc").get();
 
-    const querySnapshot = await usersRef
-      .doc(userId)
-      .collection("scans")
-      .orderBy("createdAt", "desc")
-      .get();
+		if (querySnapshot.empty) {
+			console.log(`No scan histories found for user: ${userId}`);
+			return [];
+		}
 
-    if (querySnapshot.empty) {
-      return false;
-    }
+		const histories = querySnapshot.docs.map((doc) => ({
+			id: doc.id,
+			...doc.data()
+		}));
 
-    const histories = querySnapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
-
-    return histories;
-  } catch (err) {
-    console.error("Error fetching scan histories:", err);
-    return false;
-  }
+		console.log(`Found ${histories.length} scan histories for user: ${userId}`);
+		return histories;
+	} catch (err) {
+		console.error("Error fetching scan histories:", err);
+		throw new Error();
+	}
 };
 
 const postScan = async (userId, image) => {
-  // Ade
-  // TODO: Olah gambar ke service ai, lalu simpan hasil dan input ke database, simpan gambar ke storage
-  // input: user id, image
-  // output: Jika berhasil kembalikan result dari hasil pengolahan ai, jika gagal kembalikan false
+	try {
+		// Step 1: Process the image with AI service
+		const result = await predict(image);
+		if (!result) {
+			console.error("AI processing failed.");
+			return false;
+		}
 
-  return {};
+		// Step 2: Upload the image to Cloud Storage
+		const imageUploadResult = await storeScanImage(userId, image);
+		if (!imageUploadResult) {
+			console.error("Failed to upload image to storage.");
+			return false;
+		}
+
+		// Step 3: Store the AI result and image metadata in Firestore
+		const scanData = {
+			id: generateId(),
+			image: imageUploadResult,
+			result,
+			createdAt: new Date()
+		};
+
+		// Save scan data to Firestore
+		const scanRef = usersRef.doc(userId).collection("scans").doc(scanData.id);
+		await scanRef.set(scanData);
+
+		console.log(`Scan saved successfully for user: ${userId}`);
+		return result;
+	} catch (err) {
+		console.error("Error posting scan:", err);
+		return false;
+	}
 };
 
 module.exports = { getHistories, postScan };

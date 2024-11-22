@@ -1,9 +1,7 @@
-const { usersRef } = require("../config/firestore");
+const { usersRef } = require("../services/firestore");
 const { generateId, hashPassword, verifyPassword } = require("../utils/commonHelper");
 
 const create = async ({ email, password, name, picture }) => {
-	// Ade
-
 	try {
 		const newUser = {
 			id: generateId(),
@@ -26,14 +24,8 @@ const create = async ({ email, password, name, picture }) => {
 };
 
 const findEmail = async (email) => {
-	// Zacky
-	// TODO: Cari email di database
-	// input: email
-	// output: Jika ada kembalikan true, jika tidak kembalikan false
-
 	try {
 		const snapshot = await usersRef.where("email", "==", email).get();
-
 		if (!snapshot.empty) {
 			return true;
 		}
@@ -41,26 +33,20 @@ const findEmail = async (email) => {
 		return false;
 	} catch (err) {
 		console.error("Error finding email:", err);
-
 		return false;
 	}
 };
 
 const findByEmail = async (email) => {
-	// Thessa
-	// TODO: Cari data berdasarkan email di database
-	// input: email
-	// output: Jika ada kembalikan data, jika tidak kembalikan false
-
 	try {
 		const querySnapshot = await usersRef.where("email", "==", email).get();
-
 		if (querySnapshot.empty) {
+			console.log(`No user found with email: ${email}`);
 			return false;
 		}
 
 		const userData = querySnapshot.docs[0].data();
-		userData.id = querySnapshot.docs[0].id;
+
 		return userData;
 	} catch (err) {
 		console.error("Error finding user by email:", err);
@@ -69,20 +55,15 @@ const findByEmail = async (email) => {
 };
 
 const findOne = async (id) => {
-	// Iskandar
-	// TODO: Cari data berdasarkan id di database
-	// input: id
-	// output: Jika ada kembalikan data, jika tidak kembalikan false
-
 	try {
 		const userDoc = await usersRef.doc(id).get();
-
 		if (!userDoc.exists) {
+			console.log(`No user found with ID: ${id}`);
 			return false;
 		}
 
 		const userData = userDoc.data();
-		userData.id = userDoc.id; // Tambahkan id ke data yang dikembalikan
+
 		return userData;
 	} catch (err) {
 		console.error("Error finding user by id:", err);
@@ -91,61 +72,38 @@ const findOne = async (id) => {
 };
 
 const patchOne = async (id, updateData) => {
-	// Thessa
-	// TODO: Update data user di database berdasarkan id
-	// input: id
-	// output: Jika berhasil kembalikan data, jika gagal kembalikan false
-
 	try {
-		if (!id || typeof id !== "string") {
-			console.error("Invalid ID.");
-			return false;
-		}
-
-		if (!updateData || typeof updateData !== "object" || Object.keys(updateData).length === 0) {
-			console.error("Invalid updateData. Must be a non-empty object.");
-			return false;
-		}
-
 		const userDoc = usersRef.doc(id);
 
 		const docSnapshot = await userDoc.get();
 		if (!docSnapshot.exists) {
-			console.error(`User with ID ${id} does not exist.`);
+			console.log(`User with ID ${id} does not exist.`);
 			return false;
 		}
 
 		updateData.updatedAt = new Date();
-
 		await userDoc.update(updateData);
 
 		const updatedDoc = await userDoc.get();
 		const updatedData = updatedDoc.data();
-		updatedData.id = updatedDoc.id;
 
 		return updatedData;
 	} catch (err) {
-		console.error("Error updating user in patchOne:", err);
+		console.error("Error updating user:", err);
 		return false;
 	}
 };
 
 const deleteOne = async (id) => {
-	// Zacky
-	// TODO: Hapus data user di database berdasarkan id
-	// input: id
-	// output: Jika berhasil kembalikan true, jika gagal kembalikan false
-
 	try {
 		const userDoc = await usersRef.doc(id).get();
 		if (!userDoc.exists) {
-			console.log(`User with id ${id} does not exist.`);
+			console.log(`User with ID ${id} does not exist.`);
 			return false;
 		}
 
 		await usersRef.doc(id).delete();
 
-		console.log(`User with id ${id} deleted successfully.`);
 		return true;
 	} catch (err) {
 		console.error("Error deleting user:", err);
@@ -154,16 +112,10 @@ const deleteOne = async (id) => {
 };
 
 const signin = async (email, password) => {
-	// Iskandar
-	// TODO: Cari dan verifikasi email dan password di database
-	// input: email, password
-	// output: Jika valid kembalikan true, jika tidak kembalikan false
-
 	try {
 		const querySnapshot = await usersRef.where("email", "==", email).get();
-
 		if (querySnapshot.empty) {
-			console.error("Email not found.");
+			console.log(`Email ${email} not found.`);
 			return false;
 		}
 
@@ -172,7 +124,7 @@ const signin = async (email, password) => {
 
 		const isPasswordValid = await verifyPassword(password, userData.password);
 		if (!isPasswordValid) {
-			console.error("Invalid password.");
+			console.log(`Invalid password for user: ${email}`);
 			return false;
 		}
 
