@@ -1,44 +1,41 @@
 const scanModel = require("../models/scanModel");
 const { validateScanImage } = require("../utils/validator");
+const { errorResponse, successResponse } = require("../utils/response");
 
 const getScans = async (req, res) => {
-	const userId = req.params.userId;
+	try {
+		const userId = req.params.userId;
+		const data = await scanModel.getHistories(userId);
 
-	const data = await scanModel.getHistories(userId);
-	if (!data) {
-		return res.status(500).send(JSON.stringify({ status: "error", message: "Error getting scans" }));
+		if (!data) {
+			return errorResponse(res, 404, "No scans found for this user");
+		}
+
+		return successResponse(res, 200, "Scans retrieved successfully", data);
+	} catch (error) {
+		return errorResponse(res, 500, "Error getting scans");
 	}
-
-	return res.status(200).send(
-		JSON.stringify({
-			status: "success",
-			message: "Scans retrieved successfully",
-			data
-		})
-	);
 };
 
 const postScans = async (req, res) => {
-	const userId = req.params.userId;
-	const image = req.body;
+	try {
+		const userId = req.params.userId;
+		const image = req.body;
 
-	const isImageValid = validateScanImage(image);
-	if (!isImageValid) {
-		return res.status(400).send(JSON.stringify({ status: "error", message: "Image format is invalid or missing" }));
+		const isImageValid = validateScanImage(image);
+		if (!isImageValid) {
+			return errorResponse(res, 400, "Image format is invalid or missing");
+		}
+
+		const data = await scanModel.postScan(userId, image);
+		if (!data) {
+			return errorResponse(res, 500, "Error processing scan result");
+		}
+
+		return successResponse(res, 200, "Scan processed successfully", data);
+	} catch (error) {
+		return errorResponse(res, 500, "An unexpected error occurred while processing scan");
 	}
-
-	const data = await scanModel.postScan(userId, image);
-	if (!data) {
-		return res.status(500).send(JSON.stringify({ status: "error", message: "Error getting scans result" }));
-	}
-
-	return res.status(200).send(
-		JSON.stringify({
-			status: "success",
-			message: "Scans retrieved successfully",
-			data
-		})
-	);
 };
 
 module.exports = { getScans, postScans };

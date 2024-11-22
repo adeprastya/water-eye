@@ -49,8 +49,26 @@ const validateScanImage = (image) => {
 	return true;
 };
 
+const validatePatchUserData = (data) => {
+	const schema = Joi.object({
+		name: Joi.string()
+			.pattern(/^[a-zA-Z\s]{2,}$/)
+			.optional(),
+		picture: Joi.string().uri().optional()
+	});
+
+	const { error } = schema.validate(data);
+	if (error) {
+		console.error("Validation failed:", error.message);
+		return false;
+	}
+
+	return true;
+};
+
 module.exports = {
 	validateRegisterData,
 	validateSigninData,
+	validatePatchUserData,
 	validateScanImage
 };
