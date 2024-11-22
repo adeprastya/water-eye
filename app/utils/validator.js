@@ -1,102 +1,56 @@
+const Joi = require("joi");
+
 const validateRegisterData = (data) => {
-  // Zacky
-  // TODO: Validasi field yang diperlukan { email, password, name, picture }, dan format data sesuai
-  // input: req.body
-  // output: Jika valid kembalikan true, jika tidak kembalikan false
+	const schema = Joi.object({
+		email: Joi.string().email().required(),
+		password: Joi.string().min(6).required(),
+		name: Joi.string()
+			.pattern(/^[a-zA-Z\s]{2,}$/)
+			.required(),
+		picture: Joi.string().uri().optional()
+	});
 
-	try {
-        const { email, password, name, picture } = data;
+	const { error } = schema.validate(data);
+	if (error) {
+		console.error("Validation failed:", error.message);
+		return false;
+	}
 
-        if (!email || !password || !name) {
-            console.error("Validation failed: Missing required fields");
-            return false;
-        }
-
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            console.error("Validation failed: Invalid email format");
-            return false;
-        }
-
-        if (password.length < 6) {
-            console.error("Validation failed: Password must be at least 6 characters long");
-            return false;
-        }
-
-        const nameRegex = /^[a-zA-Z\s]{2,}$/;
-        if (!nameRegex.test(name)) {
-            console.error("Validation failed: Invalid name format");
-            return false;
-        }
-
-        if (picture) {
-            const urlRegex = /^(https?:\/\/[^\s$.?#].[^\s]*)$/;
-            if (!urlRegex.test(picture)) {
-                console.error("Validation failed: Invalid picture URL");
-                return false;
-            }
-        }
-		
-		 return true;
-	 } catch (err) {
-		 console.error("Error during validation:", err);
-		 return false;
-	 }
+	return true;
 };
 
 const validateSigninData = (data) => {
-  // Iskandar
-  // TODO: Validasi field yang diperlukan { email, password }, dan format data sesuai
-  // input: req.body
-  // output: Jika valid kembalikan true, jika tidak kembalikan false
+	const schema = Joi.object({
+		email: Joi.string().email().required(),
+		password: Joi.string().min(6).required()
+	});
 
-  return true;
+	const { error } = schema.validate(data);
+	if (error) {
+		console.error("Validation failed:", error.message);
+		return false;
+	}
+
+	return true;
 };
 
 const validateScanImage = (image) => {
-  // Thessa
-  // TODO: Validasi data dan format image sesuai
-  // input: image
-  // output: Jika valid kembalikan true, jika tidak kembalikan false
-  try {
-    // Validasi apakah input ada
-    if (!image) {
-      console.error("Image is required.");
-      return false;
-    }
+	const schema = Joi.alternatives().try(
+		Joi.string().pattern(/^data:image\/(jpeg|png|gif|bmp|webp);base64,[A-Za-z0-9+/=]+$/),
+		Joi.binary().max(5 * 1024 * 1024) // Max 5MB
+	);
 
-    // Validasi apakah input memiliki tipe data Buffer atau Base64 string
-    if (!(Buffer.isBuffer(image) || typeof image === "string")) {
-      console.error("Invalid image format. Expected Buffer or Base64 string.");
-      return false;
-    }
+	const { error } = schema.validate(image);
+	if (error) {
+		console.error("Validation failed:", error.message);
+		return false;
+	}
 
-    // Jika Base64 string, periksa apakah format valid
-    if (typeof image === "string") {
-      const base64Regex =
-        /^data:image\/(jpeg|png|gif|bmp|webp);base64,[A-Za-z0-9+/=]+$/;
-      if (!base64Regex.test(image)) {
-        console.error("Invalid Base64 image string format.");
-        return false;
-      }
-    }
-
-    // Validasi ukuran image jika menggunakan Buffer (misalnya, maksimum 5MB)
-    if (Buffer.isBuffer(image) && image.length > 5 * 1024 * 1024) {
-      console.error("Image size exceeds the maximum allowed size of 5MB.");
-      return false;
-    }
-
-    // Jika semua validasi lolos
-    return true;
-  } catch (err) {
-    console.error("Error validating image:", err);
-    return false;
-  }
+	return true;
 };
 
 module.exports = {
-  validateRegisterData,
-  validateSigninData,
-  validateScanImage,
+	validateRegisterData,
+	validateSigninData,
+	validateScanImage
 };
