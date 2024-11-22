@@ -3,8 +3,8 @@ const express = require("express");
 const cors = require("cors");
 const helmet = require("helmet");
 
-const authRoute = require("./routes/authRoute");
-const userRoute = require("./routes/userRoute");
+const authRouter = require("./routes/authRouter");
+const userRouter = require("./routes/userRouter");
 
 const PORT = process.env.PORT || 3000;
 const CLIENT_ORIGIN = process.env.CLIENT_ORIGIN || "*";
@@ -15,8 +15,8 @@ app.use(helmet());
 app.use(cors({ origin: CLIENT_ORIGIN }));
 app.use(express.json());
 
-app.use("/auth", authRoute);
-app.use("/user", userRoute);
+app.use("/auth", authRouter);
+app.use("/user", userRouter);
 app.get("/health", (req, res) => res.status(200).json({ status: "OK", timestamp: new Date() }));
 
 app.use((err, req, res, next) => {
