@@ -34,8 +34,10 @@ const postScan = async (userId, image) => {
 			return false;
 		}
 
+		const scanId = generateId();
+
 		// Step 2: Upload the image to Cloud Storage
-		const imageUploadResult = await storeScanImage(userId, image);
+		const imageUploadResult = await storeScanImage(scanId, image);
 		if (!imageUploadResult) {
 			console.error("Failed to upload image to storage.");
 			return false;
@@ -43,7 +45,7 @@ const postScan = async (userId, image) => {
 
 		// Step 3: Store the AI result and image metadata in Firestore
 		const scanData = {
-			id: generateId(),
+			id: scanId,
 			image: imageUploadResult,
 			result,
 			createdAt: new Date()
