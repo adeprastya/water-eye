@@ -9,7 +9,7 @@ const signup = async (req, res) => {
 		return errorResponse(res, 400, "Invalid request data or missing required fields");
 	}
 
-	const { email, password, name, picture } = req.body;
+	const { email, password, name } = req.body;
 
 	try {
 		const emailExist = await userModel.findEmail(email);
@@ -17,7 +17,7 @@ const signup = async (req, res) => {
 			return errorResponse(res, 409, "Email already exists");
 		}
 
-		const userCreated = await userModel.create({ email, password, name, picture });
+		const userCreated = await userModel.create({ email, password, name });
 		if (!userCreated) {
 			return errorResponse(res, 500, "Error creating user");
 		}
@@ -52,7 +52,7 @@ const signin = async (req, res) => {
 			return errorResponse(res, 500, "Error generating token");
 		}
 
-		return successResponse(res, 200, "User signed in successfully", { token });
+		return successResponse(res, 200, "User signed in successfully", { id, token: `Bearer ${token}` });
 	} catch (error) {
 		return errorResponse(res, 500, "An unexpected error occurred");
 	}

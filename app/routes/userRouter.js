@@ -5,12 +5,14 @@ const { getUser, patchUser, deleteUser } = require("../controllers/userControlle
 const { getScans, postScans } = require("../controllers/scansController");
 const authMiddleware = require("../middlewares/authMiddleware");
 
-router.use(authMiddleware);
-
 // User Routes
-router.route("/:userId").get(getUser).patch(patchUser).delete(deleteUser);
+router
+	.route("/:userId")
+	.get(authMiddleware, getUser)
+	.patch(authMiddleware, patchUser)
+	.delete(authMiddleware, deleteUser);
 
 // Scans Routes
-router.route("/:userId/scans").get(getScans).post(postScans);
+router.route("/scans").get(authMiddleware, getScans).post(authMiddleware, postScans);
 
 module.exports = router;

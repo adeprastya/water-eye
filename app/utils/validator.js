@@ -15,7 +15,7 @@ const validateRegisterData = (data) => {
 
 	const { error } = schema.validate(data);
 	if (error) {
-		throw new Error(`Validation failed: ${error.message}`);
+		return false;
 	}
 
 	return true;
@@ -29,7 +29,7 @@ const validateSigninData = (data) => {
 
 	const { error } = schema.validate(data);
 	if (error) {
-		throw new Error(`Validation failed: ${error.message}`);
+		return false;
 	}
 
 	return true;
@@ -37,13 +37,12 @@ const validateSigninData = (data) => {
 
 const validatePatchUserData = (data) => {
 	const schema = Joi.object({
-		name: nameSchema.optional(),
-		picture: Joi.string().uri().optional().allow(null, "")
+		name: nameSchema.optional()
 	});
 
 	const { error } = schema.validate(data);
 	if (error) {
-		throw new Error(`Validation failed: ${error.message}`);
+		return false;
 	}
 
 	return true;
@@ -57,7 +56,7 @@ const validateScanImage = (image) => {
 
 	const { error } = schema.validate(image);
 	if (error) {
-		throw new Error(`Validation failed: ${error.message}`);
+		return false;
 	}
 
 	return true;

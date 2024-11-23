@@ -1,14 +1,13 @@
 const { usersRef } = require("../services/firestore");
 const { generateId, hashPassword, verifyPassword } = require("../utils/commonHelper");
 
-const create = async ({ email, password, name, picture }) => {
+const create = async ({ email, password, name }) => {
 	try {
 		const newUser = {
 			id: generateId(),
 			email,
 			password: await hashPassword(password),
 			name,
-			picture: picture || "",
 			createdAt: new Date(),
 			updatedAt: new Date()
 		};

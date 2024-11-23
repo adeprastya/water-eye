@@ -2,7 +2,7 @@ const { errorResponse } = require("../utils/response");
 const { decodeToken } = require("../utils/token");
 
 const authMiddleware = (req, res, next) => {
-	const { userId } = req.params;
+	const userId = req.params.userId;
 
 	const authHeader = req.headers.authorization;
 	if (!authHeader || !authHeader.startsWith("Bearer ")) {
@@ -22,7 +22,7 @@ const authMiddleware = (req, res, next) => {
 		return errorResponse(res, 401, "User Unauthenticated");
 	}
 
-	if (userId !== payloadId) {
+	if (userId != payloadId) {
 		return errorResponse(res, 403, "User Unauthorized");
 	}
 

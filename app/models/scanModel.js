@@ -21,7 +21,7 @@ const getHistories = async (userId) => {
 		return histories;
 	} catch (err) {
 		console.error("Error fetching scan histories:", err);
-		throw new Error();
+		return false;
 	}
 };
 

@@ -7,28 +7,21 @@ if (!SECRET_KEY) {
 }
 
 const generateToken = (id) => {
-	try {
-		const token = jwt.sign({ id }, SECRET_KEY, { algorithm: "HS256", expiresIn: "1h" });
-
-		return token;
-	} catch (err) {
-		console.error("Error generating token:", err.message);
+	const token = jwt.sign({ id }, SECRET_KEY, { algorithm: "HS256", expiresIn: "1h" });
+	if (!token) {
 		return false;
 	}
+
+	return token;
 };
 
 const decodeToken = (token) => {
-	try {
-		const result = jwt.verify(token, SECRET_KEY);
-		if (!result || !result.id) {
-			throw new Error("Invalid token or payload");
-		}
-
-		return result.id;
-	} catch (err) {
-		console.error("Error decoding token:", err.message);
+	const result = jwt.verify(token, SECRET_KEY);
+	if (!result || !result.id) {
 		return false;
 	}
+
+	return result.id;
 };
 
 module.exports = { generateToken, decodeToken };

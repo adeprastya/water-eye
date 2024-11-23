@@ -2,15 +2,10 @@ const crypto = require("crypto");
 const argon2 = require("argon2");
 
 const generateId = () => {
-	try {
-		const randomPart = crypto.randomBytes(16).toString("hex");
-		const timestampPart = Date.now().toString(36);
+	const randomPart = crypto.randomBytes(16).toString("hex");
+	const timestampPart = Date.now().toString(36);
 
-		return `${randomPart}${timestampPart}`;
-	} catch (err) {
-		console.error("Error generating ID:", err);
-		throw new Error("Error generating ID");
-	}
+	return `${randomPart}${timestampPart}`;
 };
 
 const hashPassword = async (password) => {
@@ -20,7 +15,7 @@ const hashPassword = async (password) => {
 		return hashedPassword;
 	} catch (err) {
 		console.error("Error hashing password:", err);
-		throw new Error(`Error hashing password: ${err.message}`);
+		return false;
 	}
 };
 
