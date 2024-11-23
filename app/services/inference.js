@@ -7,8 +7,13 @@ const predict = async (image) => {
 	// 	  analysis: "analysis_result",
 	// 	  recommendation: "recommendation_text"
 	// }
+	// if error, return false
 
-	return "prediction result";
+	return {
+		quality: "good",
+		analysis: "analysis_result",
+		recommendation: "recommendation_text"
+	};
 };
 
 module.exports = { predict };

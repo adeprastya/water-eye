@@ -1,5 +1,8 @@
 const express = require("express");
+const multer = require("multer");
+
 const router = express.Router();
+const upload = multer();
 
 const { getUser, patchUser, deleteUser } = require("../controllers/userController");
 const { getScans, postScans } = require("../controllers/scansController");
@@ -13,6 +16,6 @@ router
 	.delete(authMiddleware, deleteUser);
 
 // Scans Routes
-router.route("/scans").get(authMiddleware, getScans).post(authMiddleware, postScans);
+router.route("/:userId/scans").get(authMiddleware, getScans).post(authMiddleware, upload.single("image"), postScans);
 
 module.exports = router;

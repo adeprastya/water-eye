@@ -51,7 +51,7 @@ const validatePatchUserData = (data) => {
 const validateScanImage = (image) => {
 	const schema = Joi.alternatives().try(
 		Joi.string().pattern(/^data:image\/(jpeg|jpg|png|bmp|webp);base64,[A-Za-z0-9+/=]+$/),
-		Joi.binary().max(5 * 1024 * 1024) // images max 5MB
+		Joi.binary().max(1024 * 1024 * 10) // images max 10MB
 	);
 
 	const { error } = schema.validate(image);

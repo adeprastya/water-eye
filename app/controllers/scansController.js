@@ -16,14 +16,15 @@ const getScans = async (req, res) => {
 const postScans = async (req, res) => {
 	try {
 		const userId = req.params.userId;
-		const image = req.body;
+		const image = req.file;
+		const base64Image = `data:${image.mimetype};base64,${image.buffer.toString("base64")}`;
 
-		const isImageValid = validateScanImage(image);
+		const isImageValid = validateScanImage(base64Image);
 		if (!isImageValid) {
 			return errorResponse(res, 400, "Image format is invalid or missing");
 		}
 
-		const result = await scanModel.postScan(userId, image);
+		const result = await scanModel.postScan(userId, base64Image);
 		if (!result) {
 			return errorResponse(res, 500, "Error processing scan result");
 		}

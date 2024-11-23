@@ -17,7 +17,7 @@ const bucket = storage.bucket(BUCKET_NAME);
 const storeScanImage = async (scanId, image) => {
 	try {
 		// Prepare the file name for the image (you can customize this as needed)
-		const fileName = `${scanId}-${Date.now()}.png`;
+		const fileName = `scans/${scanId}-${Date.now()}.png`;
 
 		// If the image is in base64 format, we need to convert it to a buffer
 		let buffer;
@@ -35,12 +35,11 @@ const storeScanImage = async (scanId, image) => {
 
 		// Upload the image to Google Cloud Storage
 		await file.save(buffer, {
-			contentType: "image/png", // Assuming PNG, modify based on the actual image format
-			public: true // Make the file publicly accessible (optional)
+			contentType: "image/png" // Assuming PNG, modify based on the actual image format
 		});
 
 		// Get the public URL of the uploaded file
-		const imageUrl = `https://storage.googleapis.com/${BUCKET_NAME}/scans/${fileName}`;
+		const imageUrl = `https://storage.googleapis.com/${BUCKET_NAME}/${fileName}`;
 
 		return imageUrl;
 	} catch (err) {
