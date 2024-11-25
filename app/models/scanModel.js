@@ -49,7 +49,7 @@ const postScan = async (userId, image) => {
 
 		const userData = await findOne(userId);
 		await patchOne(userId, {
-			dailyPoints: userData.dailyPoints + 1,
+			dailyScanHits: userData.dailyScanHits + 1,
 			lastScan: new Date()
 		});
 

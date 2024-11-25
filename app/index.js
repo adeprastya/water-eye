@@ -24,7 +24,7 @@ app.use((err, req, res, next) => {
 	res.status(err.status || 500).json({ message: err.message || "Internal Server Error" });
 });
 
-app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`\nServer running on http://localhost:${PORT}`));
 
 process.on("SIGINT", () => {
 	console.log("Server shutting down...");

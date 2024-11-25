@@ -49,4 +49,17 @@ const deleteUser = async (req, res) => {
 	}
 };
 
-module.exports = { getUser, patchUser, deleteUser };
+const upgradeUser = async (req, res) => {
+	try {
+		const result = await userModel.patchOne(req.params.userId, { isPremium: true });
+		if (!result) {
+			return errorResponse(res, 404, "User not found or upgrade failed");
+		}
+
+		return successResponse(res, 200, "User account upgraded to premium successfully");
+	} catch (error) {
+		return errorResponse(res, 500, "Error upgrading user");
+	}
+};
+
+module.exports = { getUser, patchUser, deleteUser, upgradeUser };

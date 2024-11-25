@@ -7,7 +7,7 @@ const pointsMiddleware = async (req, res, next) => {
 	try {
 		const userId = req.params.userId;
 		const userData = await findOne(userId);
-		let currentDailyPoints = userData.dailyPoints;
+		let currentScanHits = userData.dailyScanHits;
 
 		const currentDate = new Date();
 		const lastScanDate = userData.lastScan.toDate();
@@ -30,13 +30,13 @@ const pointsMiddleware = async (req, res, next) => {
 			currentMinute !== lastScanMinute
 		) {
 			await patchOne(userId, {
-				dailyPoints: 0
+				dailyScanHits: 0
 			});
 
-			currentDailyPoints = 0;
+			currentScanHits = 0;
 		}
 
-		if (currentDailyPoints >= MAX_SCAN && userData.isPremium === false) {
+		if (currentScanHits >= MAX_SCAN && userData.isPremium === false) {
 			return errorResponse(res, 500, "Daily points limit exceeded");
 		}
 
