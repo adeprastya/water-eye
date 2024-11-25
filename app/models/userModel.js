@@ -9,7 +9,10 @@ const create = async ({ email, password, name }) => {
 			password: await hashPassword(password),
 			name,
 			createdAt: new Date(),
-			updatedAt: new Date()
+			updatedAt: new Date(),
+			dailyPoints: 0,
+			lastScan: new Date(),
+			isPremium: false
 		};
 
 		const userRef = usersRef.doc(newUser.id);

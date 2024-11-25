@@ -7,6 +7,7 @@ const upload = multer();
 const { getUser, patchUser, deleteUser } = require("../controllers/userController");
 const { getScans, postScans } = require("../controllers/scansController");
 const authMiddleware = require("../middlewares/authMiddleware");
+const pointsMiddleware = require("../middlewares/pointsMiddleware");
 
 // User Routes
 router
@@ -16,6 +17,9 @@ router
 	.delete(authMiddleware, deleteUser);
 
 // Scans Routes
-router.route("/:userId/scans").get(authMiddleware, getScans).post(authMiddleware, upload.single("image"), postScans);
+router
+	.route("/:userId/scans")
+	.get(authMiddleware, getScans)
+	.post(authMiddleware, pointsMiddleware, upload.single("image"), postScans);
 
 module.exports = router;

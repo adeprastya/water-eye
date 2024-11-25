@@ -2,6 +2,7 @@ const { usersRef } = require("../services/firestore");
 const { storeScanImage } = require("../services/cloudStorage");
 const { predict } = require("../services/inference");
 const { generateId } = require("../utils/commonHelper");
+const { findOne, patchOne } = require("../models/userModel");
 
 const getHistories = async (userId) => {
 	try {
@@ -26,7 +27,6 @@ const postScan = async (userId, image) => {
 	try {
 		const result = await predict(image);
 		if (!result) {
-			console.error("AI processing failed.");
 			return false;
 		}
 
@@ -34,7 +34,6 @@ const postScan = async (userId, image) => {
 
 		const imageUploadResult = await storeScanImage(scanId, image);
 		if (!imageUploadResult) {
-			console.error("Failed to upload image to storage.");
 			return false;
 		}
 
@@ -47,6 +46,12 @@ const postScan = async (userId, image) => {
 
 		const scanRef = usersRef.doc(userId).collection("scans").doc(scanData.id);
 		await scanRef.set(scanData);
+
+		const userData = await findOne(userId);
+		await patchOne(userId, {
+			dailyPoints: userData.dailyPoints + 1,
+			lastScan: new Date()
+		});
 
 		return result;
 	} catch (err) {
