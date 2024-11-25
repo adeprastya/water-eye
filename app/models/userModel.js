@@ -8,11 +8,11 @@ const create = async ({ email, password, name }) => {
 			email,
 			password: await hashPassword(password),
 			name,
-			createdAt: new Date(),
-			updatedAt: new Date(),
 			dailyScanHits: 0,
 			lastScan: new Date(),
-			isPremium: false
+			isPremium: false,
+			createdAt: new Date(),
+			updatedAt: new Date()
 		};
 
 		const userRef = usersRef.doc(newUser.id);
@@ -27,7 +27,7 @@ const create = async ({ email, password, name }) => {
 
 const findEmail = async (email) => {
 	try {
-		const snapshot = await usersRef.where("email", "==", email).get();
+		const snapshot = await usersRef.where("email", "==", email).limit(1).get();
 		if (!snapshot.empty) {
 			return true;
 		}
@@ -41,13 +41,19 @@ const findEmail = async (email) => {
 
 const findByEmail = async (email) => {
 	try {
-		const querySnapshot = await usersRef.where("email", "==", email).get();
+		const querySnapshot = await usersRef.where("email", "==", email).limit(1).get();
 		if (querySnapshot.empty) {
-			console.log(`No user found with email: ${email}`);
 			return false;
 		}
 
 		const userData = querySnapshot.docs[0].data();
+
+		if (userData.createdAt && userData.createdAt.toDate) {
+			userData.createdAt = userData.createdAt.toDate();
+		}
+		if (userData.updatedAt && userData.updatedAt.toDate) {
+			userData.updatedAt = userData.updatedAt.toDate();
+		}
 
 		return userData;
 	} catch (err) {
@@ -60,11 +66,17 @@ const findOne = async (id) => {
 	try {
 		const userDoc = await usersRef.doc(id).get();
 		if (!userDoc.exists) {
-			console.log(`No user found with ID: ${id}`);
 			return false;
 		}
 
 		const userData = userDoc.data();
+
+		if (userData.createdAt && userData.createdAt.toDate) {
+			userData.createdAt = userData.createdAt.toDate();
+		}
+		if (userData.updatedAt && userData.updatedAt.toDate) {
+			userData.updatedAt = userData.updatedAt.toDate();
+		}
 
 		return userData;
 	} catch (err) {
@@ -79,17 +91,15 @@ const patchOne = async (id, updateData) => {
 
 		const docSnapshot = await userDoc.get();
 		if (!docSnapshot.exists) {
-			console.log(`User with ID ${id} does not exist.`);
 			return false;
 		}
 
 		updateData.updatedAt = new Date();
 		await userDoc.update(updateData);
 
-		const updatedDoc = await userDoc.get();
-		const updatedData = updatedDoc.data();
+		const updatedDoc = await findOne(id);
 
-		return updatedData;
+		return updatedDoc;
 	} catch (err) {
 		console.error("Error updating user:", err);
 		return false;
@@ -100,7 +110,6 @@ const deleteOne = async (id) => {
 	try {
 		const userDoc = await usersRef.doc(id).get();
 		if (!userDoc.exists) {
-			console.log(`User with ID ${id} does not exist.`);
 			return false;
 		}
 
@@ -117,7 +126,6 @@ const signin = async (email, password) => {
 	try {
 		const querySnapshot = await usersRef.where("email", "==", email).get();
 		if (querySnapshot.empty) {
-			console.log(`Email ${email} not found.`);
 			return false;
 		}
 
@@ -126,7 +134,6 @@ const signin = async (email, password) => {
 
 		const isPasswordValid = await verifyPassword(password, userData.password);
 		if (!isPasswordValid) {
-			console.log(`Invalid password for user: ${email}`);
 			return false;
 		}
 

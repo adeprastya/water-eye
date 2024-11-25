@@ -11,10 +11,15 @@ const getHistories = async (userId) => {
 			return [];
 		}
 
-		const histories = querySnapshot.docs.map((doc) => ({
-			id: doc.id,
-			...doc.data()
-		}));
+		const histories = querySnapshot.docs.map((doc) => {
+			const data = doc.data();
+
+			if (data.createdAt && data.createdAt.toDate) {
+				data.createdAt = data.createdAt.toDate();
+			}
+
+			return data;
+		});
 
 		return histories;
 	} catch (err) {
