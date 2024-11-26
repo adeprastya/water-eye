@@ -35,4 +35,16 @@ const postScans = async (req, res) => {
 	}
 };
 
-module.exports = { getScans, postScans };
+const compareScans = async (req, res) => {
+	try {
+		const { userId, scanId1, scanId2 } = req.params;
+
+		const result = await scanModel.compare(userId, scanId1, scanId2);
+
+		return successResponse(res, 200, "Scan comparison successful", result);
+	} catch (error) {
+		return errorResponse(res, 500, "An unexpected error occurred while comparing scans");
+	}
+};
+
+module.exports = { getScans, postScans, compareScans };

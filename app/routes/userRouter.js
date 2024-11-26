@@ -5,7 +5,7 @@ const router = express.Router();
 const upload = multer();
 
 const { getUser, patchUser, deleteUser, upgradeUser } = require("../controllers/userController");
-const { getScans, postScans } = require("../controllers/scansController");
+const { getScans, postScans, compareScans } = require("../controllers/scansController");
 const authMiddleware = require("../middlewares/authMiddleware");
 const scanLimitMiddleware = require("../middlewares/scanLimitMiddleware");
 
@@ -23,5 +23,7 @@ router
 	.post(authMiddleware, scanLimitMiddleware, upload.single("image"), postScans);
 
 router.route("/:userId/upgrade").patch(authMiddleware, upgradeUser);
+
+router.route("/:userId/compare/:scanId1/:scanId2").patch(authMiddleware, compareScans);
 
 module.exports = router;

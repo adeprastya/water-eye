@@ -481,3 +481,60 @@ paths:
           $ref: "#/components/responses/UnauthorizedError"
         "500":
           $ref: "#/components/responses/InternalServerError"
+
+  /user/{user_id}/compare/{scan_id1}/{scan_id2}:
+    post:
+      summary: Compare two images for water quality assessment
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: user_id
+          required: true
+          schema:
+            type: string
+          description: ID of the user
+        - in: path
+          name: scan_id1
+          required: true
+          schema:
+            type: string
+          description: ID of the first scan
+        - in: path
+          name: scan_id2
+          required: true
+          schema:
+            type: string
+          description: ID of the second scan
+      responses:
+        "200":
+          description: Images compared successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "success"
+                  message:
+                    type: string
+                    example: "Images compared successfully"
+                  data:
+                    type: object
+                    properties:
+                      quality:
+                        type: string
+                        example: "Good"
+                      analysis:
+                        type: string
+                        example: "Analysis for water quality"
+                      recommendation:
+                        type: string
+                        example: "Recommendation for water management"
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+        "403":
+          $ref: "#/components/responses/UnauthorizedError"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
