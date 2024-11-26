@@ -1,4 +1,4 @@
-const { usersRef } = require("../services/firestore");
+const { usersRef, deleteRecursive } = require("../services/firestore");
 const { generateId, hashPassword, verifyPassword } = require("../utils/commonHelper");
 
 const create = async ({ email, password, name }) => {
@@ -108,12 +108,13 @@ const patchOne = async (id, updateData) => {
 
 const deleteOne = async (id) => {
 	try {
-		const userDoc = await usersRef.doc(id).get();
+		const userRef = await usersRef.doc(id);
+		const userDoc = await userRef.get();
 		if (!userDoc.exists) {
 			return false;
 		}
 
-		await usersRef.doc(id).delete();
+		await deleteRecursive(userRef);
 
 		return true;
 	} catch (err) {

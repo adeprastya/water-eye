@@ -62,9 +62,23 @@ const validateScanImage = (image) => {
 	return true;
 };
 
+const validateTrackData = (data) => {
+	const schema = Joi.object({
+		name: nameSchema
+	});
+
+	const { error } = schema.validate(data);
+	if (error) {
+		return false;
+	}
+
+	return true;
+};
+
 module.exports = {
 	validateRegisterData,
 	validateSigninData,
 	validatePatchUserData,
-	validateScanImage
+	validateScanImage,
+	validateTrackData
 };

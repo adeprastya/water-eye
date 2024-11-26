@@ -74,6 +74,19 @@ components:
           type: string
           example: "2024-11-14T10:00:00Z"
 
+    Track:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "12345"
+        name:
+          type: string
+          example: "My Pool"
+        createdAt:
+          type: string
+          example: "2024-11-14T10:00:00Z"
+
   responses:
     BadRequestError:
       description: Invalid request data
@@ -482,9 +495,9 @@ paths:
         "500":
           $ref: "#/components/responses/InternalServerError"
 
-  /user/{user_id}/compare/{scan_id1}/{scan_id2}:
-    post:
-      summary: Compare two images for water quality assessment
+  /user/{user_id}/track/:
+    get:
+      summary: Fetch all track
       security:
         - BearerAuth: []
       parameters:
@@ -494,21 +507,9 @@ paths:
           schema:
             type: string
           description: ID of the user
-        - in: path
-          name: scan_id1
-          required: true
-          schema:
-            type: string
-          description: ID of the first scan
-        - in: path
-          name: scan_id2
-          required: true
-          schema:
-            type: string
-          description: ID of the second scan
       responses:
         "200":
-          description: Images compared successfully
+          description: Tracks retrieved successfully
           content:
             application/json:
               schema:
@@ -519,19 +520,185 @@ paths:
                     example: "success"
                   message:
                     type: string
-                    example: "Images compared successfully"
+                    example: "Tracks retrieved successfully"
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Track"
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+        "403":
+          $ref: "#/components/responses/UnauthorizedError"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+    post:
+      summary: Create a new track
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: user_id
+          required: true
+          schema:
+            type: string
+          description: ID of the user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "My Pool"
+      responses:
+        "200":
+          description: Track created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "success"
+                  message:
+                    type: string
+                    example: "Track created successfully"
+                  data:
+                    $ref: "#/components/schemas/Track"
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+        "403":
+          $ref: "#/components/responses/UnauthorizedError"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+
+  /user/{user_id}/track/{track_id}:
+    delete:
+      summary: Delete a track
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: user_id
+          required: true
+          schema:
+            type: string
+          description: ID of the user
+        - in: path
+          name: track_id
+          required: true
+          schema:
+            type: string
+          description: ID of the track
+      responses:
+        "200":
+          description: Track deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "success"
+                  message:
+                    type: string
+                    example: "Track deleted successfully"
+        "403":
+          $ref: "#/components/responses/UnauthorizedError"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+
+    get:
+      summary: Get scan history in a track
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: user_id
+          required: true
+          schema:
+            type: string
+          description: ID of the user
+        - in: path
+          name: track_id
+          required: true
+          schema:
+            type: string
+          description: ID of the track
+      responses:
+        "200":
+          description: Track retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "success"
+                  message:
+                    type: string
+                    example: "Track retrieved successfully"
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Scan"
+        "400":
+          $ref: "#/components/responses/BadRequestError"
+        "403":
+          $ref: "#/components/responses/UnauthorizedError"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+
+    post:
+      summary: Post a scan to a track
+      security:
+        - BearerAuth: []
+      parameters:
+        - in: path
+          name: user_id
+          required: true
+          schema:
+            type: string
+          description: ID of the user
+        - in: path
+          name: track_id
+          required: true
+          schema:
+            type: string
+          description: ID of the track
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  example: "https://example.com/image.jpg"
+      responses:
+        "200":
+          description: Scan posted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "success"
+                  message:
+                    type: string
+                    example: "Scan posted successfully"
                   data:
                     type: object
-                    properties:
-                      quality:
-                        type: string
-                        example: "Good"
-                      analysis:
-                        type: string
-                        example: "Analysis for water quality"
-                      recommendation:
-                        type: string
-                        example: "Recommendation for water management"
+                    items:
+                      $ref: "#/components/schemas/Scan"
         "400":
           $ref: "#/components/responses/BadRequestError"
         "403":
