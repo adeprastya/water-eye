@@ -6,11 +6,11 @@ let model = true;
 const loadModel = async () => {
 	if (!model) {
 		try {
-			console.log("\n__LOADING MODEL__");
+			console.log("\n__LOADING MODEL__\n");
 
-			// model = await tf.loadLayersModel("file://path_to_your_model/tfjs_model/model.json");
+			model = await tf.loadLayersModel("file://tfjs_model/model.json");
 
-			console.log("Model loaded successfully!\n");
+			console.log("\n__MODEL LOADED__\n");
 		} catch (err) {
 			console.error("Error loading model:", err);
 			throw new Error("Failed to load model");
@@ -18,5 +18,6 @@ const loadModel = async () => {
 	}
 	return model;
 };
+loadModel();
 
 module.exports = { loadModel };
