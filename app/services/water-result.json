@@ -1,4 +1,125 @@
 {
+	"black": {
+		"color": "Black",
+		"label": {
+			"consume": false,
+			"bath": false,
+			"wash": false,
+			"irrigation": false
+		},
+		"analysis": "Air berwarna hitam secara umum menunjukkan adanya tingkat pencemaran yang signifikan atau keberadaan bahan organik alami yang tinggi. Tingkat kejernihan atau konsentrasi warna hitam menentukan penyebab utama dan dampaknya. Air hitam jernih mungkin mengindikasikan kandungan humus atau bahan organik alami, sementara air hitam pekat sering kali menunjukkan adanya pencemaran ekstrem, seperti limbah industri, logam berat, atau dekomposisi anaerobik bahan organik. Baik air hitam jernih maupun pekat dapat memiliki dampak negatif pada ekosistem, seperti menurunkan kadar oksigen terlarut dan mengancam kehidupan akuatik.",
+		"recommendation": "Pemantauan kualitas air secara rutin sangat disarankan untuk menentukan sumber dan tingkat pencemaran. Jika air hitam jernih, pengolahan sederhana seperti filtrasi dan disinfeksi dapat membuat air layak untuk keperluan tertentu. Namun, untuk air hitam pekat, diperlukan langkah pengolahan intensif seperti ultrafiltrasi atau pengolahan kimia untuk menghilangkan kontaminan. Selain itu, restorasi ekosistem seperti penanaman vegetasi di sekitar badan air dapat membantu mengurangi polusi. Penting untuk segera menghentikan sumber pencemaran jika penyebabnya berasal dari aktivitas manusia.",
+		"reference": [
+			"https://news.okezone.com/read/2016/12/13/340/1565536/air-danau-singkarak-berubah-jadi-hitam",
+			"https://jdih.brebeskab.go.id/produkhukum/dlresp/1372",
+			"http://repository.umi.ac.id/361/1/Limnologi%20Lengkap.pdf",
+			"https://www.grid.id/read/041733753/ngeri-air-sungai-berubah-warna-hitam-dan-ribuan-ikan-mati-mengambang-ternyata-inilah-penyebabnya?page=all"
+		]
+	},
+	"brown": {
+		"color": "Brown",
+		"label": {
+			"consume": false,
+			"bath": false,
+			"wash": false,
+			"irrigation": false
+		},
+		"analysis": "Air berwarna coklat dapat berasal dari berbagai penyebab, tergantung tingkat kejernihannya. Warna coklat jernih biasanya disebabkan oleh erosi tanah, sedimen alami, atau pelepasan tanin dari bahan organik seperti daun dan kayu. Sementara itu, warna coklat pekat sering menunjukkan pencemaran akibat aktivitas manusia seperti limbah domestik, limbah industri, atau banjir yang membawa lumpur dalam jumlah besar. Kadar sedimen yang tinggi dapat menurunkan kadar oksigen terlarut dan mengancam ekosistem akuatik, sementara kontaminasi kimia meningkatkan risiko kesehatan manusia dan lingkungan.",
+		"recommendation": "Pencegahan erosi tanah melalui reboisasi dan pengelolaan vegetasi di sekitar badan air sangat penting untuk mengurangi warna coklat alami. Untuk air yang lebih pekat, diperlukan pengolahan lanjutan seperti filtrasi, pengendapan, atau oksidasi untuk memastikan tidak ada kandungan bahan kimia berbahaya. Restorasi ekosistem di sekitar sumber air dapat membantu menjaga kualitas air dalam jangka panjang. Selain itu, edukasi masyarakat mengenai pentingnya pengelolaan limbah yang benar dan kebiasaan menjaga kebersihan lingkungan dapat meminimalkan dampak pencemaran.",
+		"reference": [
+			"https://www.gramedia.com/best-seller/penyebab-air-sumur-berwarna-cokelat/",
+			"https://pdampintar.id/blog/lainnya/ini-dia-cara-mengatasi-air-sumur-bor-berwarna-cokelat/",
+			"https://garuda.tv/ini-penyebab-warna-air-danau-kelimutu-berwarna-coklat/",
+			"https://www.forestdigest.com/detail/1715/air-cokelat-teluk-bima",
+			"https://jala.tech/id/blog/tips-budidaya/cara-membuat-air-tambak-berwarna-hijau-kecoklatan"
+		]
+	},
+	"green": {
+		"color": "Green",
+		"label": {
+			"consume": false,
+			"bath": false,
+			"wash": false,
+			"irrigation": false
+		},
+		"analysis": "Warna hijau pada air dapat mengindikasikan kehadiran alga atau kandungan nutrisi seperti fosfat dan nitrogen, yang memberikan kondisi ideal untuk pertumbuhan tanaman akuatik. Pada kondisi jernih, hijau menunjukkan ekosistem yang seimbang dengan kadar nutrisi rendah hingga sedang, sehingga umumnya aman untuk berbagai keperluan. Namun, warna hijau pekat sering terjadi akibat eutrofikasi, yang memicu ledakan alga dan menurunkan kualitas air secara drastis. Hal ini dapat berdampak buruk pada kesehatan manusia, ekosistem, dan aktivitas perairan seperti irigasi dan perikanan.",
+		"recommendation": "Pemantauan rutin kualitas air diperlukan untuk mendeteksi lonjakan pertumbuhan alga dan kadar nutrisi. Langkah mitigasi meliputi pengelolaan limbah domestik dan pertanian untuk mengurangi polutan seperti fosfat dan nitrogen. Restorasi ekosistem dengan menanam vegetasi di sepanjang badan air dapat membantu menyerap nutrisi berlebih dan mengurangi risiko eutrofikasi. Untuk air hijau pekat, pengolahan air tingkat lanjut seperti filtrasi atau metode biologis menggunakan ikan pemakan alga sangat disarankan. Edukasi masyarakat tentang dampak pencemaran dan pentingnya menjaga ekosistem air juga perlu ditingkatkan.",
+		"reference": [
+			"https://www.antaranews.com/berita/1221043/akademisi-sebut-fenomena-air-laut-warna-hijau-dipengaruhi-faktor-iklim",
+			"https://kumparan.com/seputar-hobi/mengenal-penyebab-air-akuarium-hijau-dan-cara-mengatasinya-dengan-mudah-231go0DoJc5",
+			"https://kaltimkece.id/warta/lingkungan/intaian-bahaya-dari-air-sungai-yang-berubah-warna",
+			"https://www.detik.com/sulsel/berita/d-6527112/kata-ahli-soal-fenomena-air-laut-selayar-berubah-jadi-hijau-tak-berbahaya",
+			"https://www.kompas.tv/regional/203273/fenomena-warna-sungai-berubah-jadi-hijau-dinas-lingkungan-hidup-lakukan-penelitian-sampel"
+		]
+	},
+	"red": {
+		"color": "Red",
+		"label": {
+			"consume": false,
+			"bath": false,
+			"wash": false,
+			"irrigation": false
+		},
+		"analysis": "Warna merah pada air dapat bervariasi penyebabnya, dari fenomena alami hingga pencemaran serius. Merah jernih sering dikaitkan dengan kandungan zat besi terlarut atau mineral alami seperti hematit, yang biasanya aman untuk penggunaan terbatas setelah penyaringan. Namun, merah pekat menunjukkan adanya kontaminasi berat, seperti limbah industri, tambang logam, atau blooming alga merah beracun (Harmful Algal Bloom). Kondisi ini berisiko tinggi terhadap ekosistem air dan kesehatan manusia, termasuk iritasi kulit, gangguan pernapasan, dan efek toksik lainnya. ",
+		"recommendation": "Untuk air merah jernih, gunakan penyaringan sederhana untuk menghilangkan oksida besi dan lakukan pemantauan kadar zat besi secara rutin. Untuk air merah pekat, hindari penggunaan sepenuhnya tanpa pengolahan intensif. Langkah-langkah seperti aerasi, filtrasi tingkat lanjut, dan pengendalian limbah diperlukan untuk memulihkan kualitas air. Edukasi masyarakat mengenai dampak pencemaran dan pelaksanaan zona konservasi dapat membantu mengurangi risiko jangka panjang.",
+		"reference": [
+			"https://www.uim.ac.id/fenomena-sungai-merah-akademisi-uim-beri-penjelasan/",
+			"https://www.tempo.co/lingkungan/fenomena-laut-merah-menyerupai-darah-ternyata-ini-sebabnya--338656",
+			"https://analisadaily.com/berita/arsip/2017/8/12/395532/penyebab-air-sungai-memerah/",
+			"https://www.mongabay.co.id/2016/08/01/mengapa-danau-ini-berubah-warna-dari-hijau-menjadi-merah-darah/"
+		]
+	},
+	"yellow": {
+		"color": "Yellow",
+		"label": {
+			"consume": false,
+			"bath": false,
+			"wash": false,
+			"irrigation": false
+		},
+		"analysis": "Warna kuning pada air dapat berasal dari beberapa sumber, mulai dari tanin alami akibat dekomposisi bahan organik seperti daun, hingga pencemaran berat oleh limbah organik atau bahan kimia industri. Kuning jernih sering kali menunjukkan kadar tanin atau mineral rendah yang relatif aman untuk beberapa penggunaan non-konsumsi, sementara kuning pekat menandakan akumulasi polutan yang serius, berpotensi membahayakan kesehatan manusia dan lingkungan.",
+		"recommendation": "Untuk air kuning jernih, disarankan dilakukan filtrasi sederhana dan desinfeksi sebelum digunakan untuk mandi, mencuci, atau irigasi. Namun, air kuning pekat harus dihindari untuk segala jenis penggunaan tanpa pengolahan mendalam seperti filtrasi berlapis dan pemurnian kimia. Upaya pengendalian pencemaran, termasuk pengelolaan limbah yang baik dan restorasi ekosistem, sangat penting untuk memulihkan kualitas air.",
+		"reference": [
+			"https://insanitarian.com/2024/01/08/kenapa-air-berwarna-kuning-dan-bagaimana-mengatasinya/",
+			"https://water.co.id/artikel/memahami-dan-mengatasi-air-kuning",
+			"https://trazt.id/cara-mengatasi-air-kuning-di-rumah-dengan-langkah-mudah/",
+			"https://filterairkotamalang.com/mengatasi-masalah-filter-air-kuning-solusi-efektif-dan-ekonomis/",
+			"https://www.adywater.com/2017/12/apa-penyebab-air-berwarna-kuning-dan-bagaimana-cara-mengatasinya.html",
+			"https://www.uim.ac.id/fenomena-sungai-merah-akademisi-uim-beri-penjelasan/"
+		]
+	},
+	"blue": {
+		"color": "Blue",
+		"label": {
+			"consume": false,
+			"bath": false,
+			"wash": false,
+			"irrigation": false
+		},
+		"analysis": "Warna biru pada air menunjukkan dua kemungkinan skenario yang berlawanan: kejernihan alami atau kontaminasi serius. Biru jernih biasanya menandakan air bersih yang aman untuk berbagai keperluan, mencerminkan kandungan mineral alami seperti kalsium karbonat. Sebaliknya, biru pekat sering kali mengindikasikan kontaminasi berat akibat fenomena eutrofikasi, alga beracun, atau limbah industri. Hal ini menyebabkan ancaman bagi kesehatan manusia, kehidupan akuatik, dan ekosistem secara keseluruhan.",
+		"recommendation": "Air biru jernih tetap membutuhkan pemantauan berkala untuk memastikan kualitasnya tidak menurun akibat aktivitas manusia atau pencemaran lingkungan. Air biru pekat memerlukan pengolahan yang intensif seperti aerasi, filtrasi, atau teknologi kimiawi untuk menghilangkan racun. Upaya pengelolaan limbah dan edukasi kepada masyarakat sangat penting untuk melindungi sumber air dari kerusakan lebih lanjut. Penegakan kebijakan lingkungan dan pengelolaan konservasi yang baik juga perlu diterapkan untuk meminimalkan dampak negatif pada kualitas air.",
+		"reference": [
+			"https://www.detik.com/sulsel/berita/d-6756339/bukan-pantulan-langit-ternyata-ini-penyebab-air-laut-berwarna-biru",
+			"https://kaltimkece.id/warta/lingkungan/intaian-bahaya-dari-air-sungai-yang-berubah-warna",
+			"https://www.detik.com/edu/detikpedia/d-6987445/warna-air-laut-di-dunia-banyak-yang-berubah-ternyata-ini-penyebabnya"
+		]
+	},
+	"transparent": {
+		"color": "Transparent",
+		"label": {
+			"consume": true,
+			"bath": true,
+			"wash": true,
+			"irrigation": true
+		},
+		"analysis": "Air yang transparan menunjukkan bahwa tidak ada partikel tersuspensi yang terlihat oleh mata, tetapi tidak selalu berarti bahwa air tersebut aman. Kejernihan air yang alami umumnya menunjukkan kualitas yang baik dan cocok untuk berbagai penggunaan. Namun, kejernihan yang 'pekat' atau terlalu jernih dapat menandakan kontaminasi dengan senyawa kimia terlarut, seperti logam berat atau bahan organik berbahaya. Air transparan tanpa uji laboratorium tambahan dapat menjadi berbahaya jika sumber airnya tidak diketahui atau berasal dari wilayah yang terkontaminasi.",
+		"recommendation": "Air yang tampak jernih sebaiknya selalu diuji kualitasnya sebelum digunakan, terutama untuk konsumsi, mandi, atau mencuci. Pengelolaan sumber air dengan melibatkan proses filtrasi modern seperti reverse osmosis atau karbon aktif sangat dianjurkan untuk memastikan keamanan air. Selain itu, tindakan pencegahan untuk mencegah kontaminasi lingkungan harus dilakukan, termasuk pengelolaan limbah yang baik dan pemantauan aktivitas manusia di sekitar sumber air. Edukasi masyarakat tentang pentingnya menjaga kebersihan dan kualitas air juga sangat penting untuk memastikan air tetap aman untuk digunakan.",
+		"reference": [
+			"https://adjar.grid.id/read/543018877/apa-warna-asli-air-dan-mengapa-kita-melihat-air-warnanya-bening",
+			"https://www.myedisi.com/faziletkids/6119/20152/mengapa-air-transparan-dan-tidak-berwarna"
+		]
+	},
+
 	"black-clear": {
 		"color": "Clear Black",
 		"label": {
@@ -16,7 +137,6 @@
 			"https://www.grid.id/read/041733753/ngeri-air-sungai-berubah-warna-hitam-dan-ribuan-ikan-mati-mengambang-ternyata-inilah-penyebabnya?page=all"
 		]
 	},
-
 	"black-concentrated": {
 		"color": "Deep Black",
 		"label": {
@@ -53,7 +173,6 @@
 			"https://jala.tech/id/blog/tips-budidaya/cara-membuat-air-tambak-berwarna-hijau-kecoklatan"
 		]
 	},
-
 	"brown-concentrated": {
 		"color": "Deep Brown",
 		"label": {
@@ -91,7 +210,6 @@
 			"https://www.kompas.tv/regional/203273/fenomena-warna-sungai-berubah-jadi-hijau-dinas-lingkungan-hidup-lakukan-penelitian-sampel"
 		]
 	},
-
 	"green-concentrated": {
 		"color": "Deep Green",
 		"label": {
@@ -128,7 +246,6 @@
 			"https://www.mongabay.co.id/2016/08/01/mengapa-danau-ini-berubah-warna-dari-hijau-menjadi-merah-darah/"
 		]
 	},
-
 	"red-concentrated": {
 		"color": "Deep Red",
 		"label": {
@@ -166,7 +283,6 @@
 			"https://www.uim.ac.id/fenomena-sungai-merah-akademisi-uim-beri-penjelasan/"
 		]
 	},
-
 	"yellow-concentrated": {
 		"color": "Deep Yellow",
 		"label": {
@@ -203,7 +319,6 @@
 			"https://www.detik.com/edu/detikpedia/d-6987445/warna-air-laut-di-dunia-banyak-yang-berubah-ternyata-ini-penyebabnya"
 		]
 	},
-
 	"blue-concentrated": {
 		"color": "Deep Blue",
 		"label": {
@@ -236,14 +351,13 @@
 			"https://www.myedisi.com/faziletkids/6119/20152/mengapa-air-transparan-dan-tidak-berwarna"
 		]
 	},
-
 	"transparent-concentrated": {
 		"color": "Deep Clear",
 		"label": {
 			"consume": false,
-			"bath": false,
-			"wash": false,
-			"irrigation": false
+			"bath": true,
+			"wash": true,
+			"irrigation": true
 		},
 		"analysis": "Air yang tampak jernih namun memiliki kejernihan yang pekat sering kali menandakan keberadaan kontaminan yang tidak terlihat, seperti senyawa kimia terlarut, logam berat, atau bahan organik. Meskipun air terlihat bersih, partikel kimia atau biologi yang terlarut dalam air ini dapat berbahaya, terutama jika berasal dari limbah industri, pertanian, atau polusi domestik. Kejernihan pekat bisa terjadi karena konsentrasi tinggi alga atau plankton yang tidak mudah terlihat, tetapi dapat mencemari kualitas air. Hal ini dapat menyebabkan dampak yang merugikan baik bagi ekosistem maupun kesehatan manusia. Pengujian laboratorium lebih lanjut diperlukan untuk mendeteksi senyawa atau kontaminan yang tidak terlihat secara visual.",
 		"recommendation": "Pengolahan air yang lebih intensif dan menyeluruh diperlukan untuk menghilangkan senyawa kimia berbahaya atau logam berat yang terlarut dalam air. Teknologi seperti filtrasi karbon aktif, reverse osmosis, atau penyaringan berbasis membran sangat dianjurkan untuk mengatasi masalah ini. Selain itu, penting untuk mengurangi pencemaran dari sumber industri dan pertanian, dan melakukan pengawasan kualitas air secara berkala untuk mendeteksi bahan kimia berbahaya yang mungkin tidak terdeteksi dengan pengamatan visual. Jangan gunakan air ini untuk konsumsi, mandi, atau mencuci tanpa pengolahan lanjutan. Dalam konteks pertanian, penggunaannya harus dilakukan dengan sangat hati-hati dan hanya setelah analisis kualitas air yang mendalam dilakukan.",
@@ -251,5 +365,9 @@
 			"https://adjar.grid.id/read/543018877/apa-warna-asli-air-dan-mengapa-kita-melihat-air-warnanya-bening",
 			"https://www.myedisi.com/faziletkids/6119/20152/mengapa-air-transparan-dan-tidak-berwarna"
 		]
+	},
+
+	"not-water": {
+		"message": "Please insert an image of water or try to take picture more clearly"
 	}
 }

@@ -1,4 +1,4 @@
-const { usersRef, scansRef } = require("../services/firestore");
+const { scansRef } = require("../services/firestore");
 const { storeScanImage } = require("../services/cloudStorage");
 const { predict } = require("../services/inference");
 const { generateId } = require("../utils/commonHelper");
@@ -28,16 +28,16 @@ const getHistories = async (userId) => {
 	}
 };
 
-const postScan = async (userId, image) => {
+const postScan = async (userId, base64Image) => {
 	try {
-		const result = await predict(image);
+		const result = await predict(base64Image);
 		if (!result) {
 			return false;
 		}
 
 		const scanId = generateId();
 
-		const imageUploadResult = await storeScanImage(scanId, image);
+		const imageUploadResult = await storeScanImage(scanId, base64Image);
 		if (!imageUploadResult) {
 			return false;
 		}

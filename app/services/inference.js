@@ -1,35 +1,58 @@
-const tf = require("@tensorflow/tfjs-node");
-const { loadModel } = require("./loadModel");
+const axios = require("axios");
 const waterResult = require("./water-result.json");
 
-const predict = async (image) => {
+const MODEL_BE_URL = process.env.MODEL_BE_URL;
+if (!MODEL_BE_URL) {
+	throw new Error("MODEL_BE_URL is not defined");
+}
+
+// const classifications = [
+// 	"not-water",
+
+// 	"black",
+// 	"brown",
+// 	"green",
+// 	"blue",
+// 	"yellow",
+// 	"red",
+// 	"transparent",
+
+// 	"black-clear",
+// 	"black-concentrated",
+// 	"brown-clear",
+// 	"brown-concentrated",
+// 	"green-clear",
+// 	"green-concentrated",
+// 	"blue-clear",
+// 	"blue-concentrated",
+// 	"yellow-clear",
+// 	"yellow-concentrated",
+// 	"red-clear",
+// 	"red-concentrated",
+// 	"transparent-clear",
+// 	"transparent-concentrated"
+// ];
+
+const predict = async (imageBase64) => {
 	try {
-		// const model = await loadModel();
-		// const tensorImage = tf.tensor(image);
+		const response = await axios.post(
+			MODEL_BE_URL + "/predict",
+			{
+				image_data: imageBase64
+			},
+			{
+				headers: {
+					"Content-Type": "application/json"
+				}
+			}
+		);
 
-		// const prediction = model.predict(tensorImage);
-		// const predictionData = prediction.dataSync();
+		const result = waterResult[response.data.prediction];
 
-		const classifications = [
-			"black-clear",
-			"black-concentrated",
-			"brown-clear",
-			"brown-concentrated",
-			"green-clear",
-			"green-concentrated",
-			"blue-clear",
-			"blue-concentrated",
-			"yellow-clear",
-			"yellow-concentrated",
-			"red-clear",
-			"red-concentrated",
-			"transparent-clear",
-			"transparent-concentrated"
-		];
-		const prediction = classifications[Math.floor(Math.random() * classifications.length)];
-		const result = waterResult[prediction];
-
-		return { ...result, confidence: "97.3%" };
+		return {
+			confidence: response.data.confidence,
+			result
+		};
 	} catch (err) {
 		console.error("Prediction error:", err);
 		return false;
