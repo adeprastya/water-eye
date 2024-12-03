@@ -38,7 +38,7 @@ const predict = async (imageBase64) => {
 		const response = await axios.post(
 			MODEL_BE_URL + "/predict",
 			{
-				image_data: imageBase64
+				image: imageBase64
 			},
 			{
 				headers: {
