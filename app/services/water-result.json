@@ -368,6 +368,7 @@
 	},
 
 	"not-water": {
+		"color": "not-water",
 		"message": "Please insert an image of water or try to take picture more clearly"
 	}
 }
