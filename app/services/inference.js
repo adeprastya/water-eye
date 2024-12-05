@@ -50,8 +50,8 @@ const predict = async (imageBase64) => {
 		const result = waterResult[response.data.prediction];
 
 		return {
-			confidence: response.data.confidence,
-			result
+			...result,
+			confidence: response.data.confidence
 		};
 	} catch (err) {
 		console.error("Prediction error:", err);
