@@ -90,6 +90,7 @@ npm run dev
 
 ## Frontend Details
 
+- **Deployed Url**: http://water-eye-442016.et.r.appspot.com
 - **Framework**: React.js
 - **Design Tool**: Figma (prototyping)
 - **Libraries**: Axios for API calls, Tailwind for styling.
@@ -98,6 +99,7 @@ npm run dev
 
 ## Backend Details
 
+- **Deployed Url**: http://35.219.47.173:3000
 - **Framework**: Express.js
 - **Database**: Firestore
 - **Storage**: Google Cloud Storage
