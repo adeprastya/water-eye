@@ -1,0 +1,27 @@
+{
+	"name": "water-eye",
+	"version": "1.0.0",
+	"description": "API for water quality app",
+	"main": "app",
+	"scripts": {
+		"start": "node app",
+		"start:dev": "nodemon app"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"@google-cloud/firestore": "^7.10.0",
+		"@google-cloud/storage": "^7.14.0",
+		"argon2": "^0.41.1",
+		"axios": "^1.7.8",
+		"cors": "^2.8.5",
+		"dotenv": "^16.4.5",
+		"express": "^4.21.1",
+		"helmet": "^8.0.0",
+		"joi": "^17.13.3",
+		"jsonwebtoken": "^9.0.2",
+		"multer": "^1.4.5-lts.1",
+		"water-eye": "file:"
+	}
+}
